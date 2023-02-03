@@ -8,6 +8,10 @@ const {token} = process.env
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+client.commands = new Collection()
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
@@ -21,10 +25,6 @@ for (const file of commandFiles) {
 }
 
 
-// Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-client.commands = new Collection()
 
 
 // When the client is ready, run this code (only once)
